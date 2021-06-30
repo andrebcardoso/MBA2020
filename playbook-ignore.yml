@@ -1,0 +1,11 @@
+- hosts: remoto
+
+  tasks:
+   - name: Listando arquivos do tmp
+     shell: ls -l /temp
+     register: tmp_files
+     ignore_errors: yes
+
+   - name: Exibindo informações da task anterior
+     debug:
+       var: tmp_files
