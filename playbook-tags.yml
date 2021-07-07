@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: remote
   gather_facts: False
   tasks:
     - name: Bom dia
