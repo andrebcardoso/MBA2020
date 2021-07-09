@@ -1,0 +1,15 @@
+---
+# handlers file for slacko
+
+- name: Mongodb start automatically after reboots
+  systemd:
+    name: mongodb
+    enabled: yes
+    state: started
+
+- name: Start service API
+  systemd:
+    name: slacko-api.service
+    enabled: yes
+    state: started
+    

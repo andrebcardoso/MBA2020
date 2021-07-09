@@ -1,0 +1,51 @@
+---
+# tasks file for slacko
+
+- name: Clone Git Prof
+  git:
+    repo: https://github.com/LeonardoDG2084/iaac_slacko-api
+    dest: /opt
+    separate_git_dir: /opt/ansible-examples.git
+
+- name: Instaling MongoDb
+  apt: 
+    name: mongodb
+    state: present
+    update_cache: yes
+  notify:
+    - Mongodb start automatically after reboots
+
+- name: Instaling Python requeriments
+  pip:
+    requirements: /opt/requeriments.txt
+
+- name: Creating directory 
+  file:
+    path: "{{ Dir_api }}"
+    state: directory
+
+- name: Copy main.py to diretory
+  copy:
+    src: "{{ main_py }}"
+    dest: "{{ Dir_api }}"
+    mode: '0755'
+    remote_src: yes
+
+- name: Copy slacko-api.sh
+  template:
+    src: templates/slacko-api.sh
+    dest: "{{ Dir_api }}"
+    mode: '0755'
+
+- name: Start service API
+  copy:
+    src: slacko-api.service
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+  notify:
+    - Start service API
+
+
+
+

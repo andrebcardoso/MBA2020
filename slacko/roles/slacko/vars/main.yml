@@ -1,0 +1,8 @@
+---
+# vars file for slacko
+
+#Diretory API
+  Dir_api: /opt/slacko-api
+
+#File Main.py
+  main_py: /opt/main.py
